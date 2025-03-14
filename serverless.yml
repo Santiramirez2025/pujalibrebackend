@@ -1,0 +1,39 @@
+service: pujalibre
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  region: us-east-1
+  environment:
+    DB_HOST: ${env:DB_HOST, "localhost"}
+    DB_USER: ${env:DB_USER, "postgres"}
+    DB_PASS: ${env:DB_PASS, ""}
+    DB_NAME: ${env:DB_NAME, "pujalibre"}
+    REDIS_URL: ${env:REDIS_URL, "redis://localhost:6379"}
+    MERCADO_PAGO_KEY: ${env:MERCADO_PAGO_KEY, ""}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+      Resource: "*"
+
+plugins:
+  - serverless-offline
+
+functions:
+  getAuctions:
+    handler: src/handlers/getAuctions.handler
+    events:
+      - http:
+          path: auctions
+          method: get
+
+  createAuction:
+    handler: src/handlers/createAuction.handler
+    events:
+      - http:
+          path: auctions
+          method: post

@@ -1,0 +1,81 @@
+{
+  "D:\\Proyecto pujalibre\\pujalibre-backend\\serverless.yml": {
+    "versionFramework": "4.8.0",
+    "servicePath": "D:\\Proyecto pujalibre\\pujalibre-backend\\serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "pujalibre",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs18.x",
+        "environment": {
+          "DB_HOST": "${env:DB_HOST}",
+          "DB_USER": "${env:DB_USER}",
+          "DB_PASS": "${env:DB_PASS}",
+          "DB_NAME": "${env:DB_NAME}",
+          "REDIS_URL": "${env:REDIS_URL}",
+          "MERCADO_PAGO_KEY": "${env:MERCADO_PAGO_KEY}"
+        }
+      },
+      "functions": {
+        "api": {
+          "handler": "src/index.handler",
+          "events": [
+            {
+              "http": {
+                "path": "/",
+                "method": "ANY"
+              }
+            },
+            {
+              "http": {
+                "path": "{proxy+}",
+                "method": "ANY"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs18.x",
+      "environment": {
+        "DB_HOST": "${env:DB_HOST}",
+        "DB_USER": "${env:DB_USER}",
+        "DB_PASS": "${env:DB_PASS}",
+        "DB_NAME": "${env:DB_NAME}",
+        "REDIS_URL": "${env:REDIS_URL}",
+        "MERCADO_PAGO_KEY": "${env:MERCADO_PAGO_KEY}"
+      }
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": true,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "error": {
+      "message": "Cannot resolve '${env:DB_HOST}' variable at 'provider.environment.DB_HOST'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.",
+      "stack": "Error: Cannot resolve '${env:DB_HOST}' variable at 'provider.environment.DB_HOST'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.\n    at _ResolverManager.resolve (file:///C:/Users/Usuario/.serverless/releases/4.8.0/package/dist/sf-core.js:1174:32615)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async #handlePlaceholderNode (file:///C:/Users/Usuario/.serverless/releases/4.8.0/package/dist/sf-core.js:1174:30822)\n    at async file:///C:/Users/Usuario/.serverless/releases/4.8.0/package/dist/sf-core.js:1174:28684\n    at async processNodeAndHandleCompletion (file:///C:/Users/Usuario/.serverless/releases/4.8.0/package/dist/sf-core.js:1174:17394)",
+      "code": "MISSING_VARIABLE_RESULT"
+    },
+    "serviceRawFile": "service: pujalibre\r\n\r\nprovider:\r\n  name: aws\r\n  runtime: nodejs18.x\r\n  environment:\r\n    DB_HOST: ${env:DB_HOST}\r\n    DB_USER: ${env:DB_USER}\r\n    DB_PASS: ${env:DB_PASS}\r\n    DB_NAME: ${env:DB_NAME}\r\n    REDIS_URL: ${env:REDIS_URL}\r\n    MERCADO_PAGO_KEY: ${env:MERCADO_PAGO_KEY}\r\n\r\nfunctions:\r\n  api:\r\n    handler: src/index.handler\r\n    events:\r\n      - http:\r\n          path: /\r\n          method: ANY\r\n      - http:\r\n          path: \"{proxy+}\"\r\n          method: ANY\r\n",
+    "command": [
+      "offline"
+    ],
+    "options": {},
+    "orgId": "73454d16-12d7-47a6-a01d-1b779b3d4e40",
+    "orgName": "pujalibre",
+    "userId": "XBP2XrXCfnvkMNfB4v",
+    "userName": "pujalibre",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
